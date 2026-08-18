@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CXL ICP Copy Tracks</title>
+    <meta
+      name="description"
+      content="CXL ICP copy tracks for individual and team purchase motions."
+    />
+    <style>
+      :root {
+        --bg: #101313;
+        --bg-deep: #060707;
+        --panel: #071717;
+        --panel-2: #111c1c;
+        --paper: #f6f0e6;
+        --ink: #f8f4eb;
+        --muted: #aebfbd;
+        --dim: #66827f;
+        --red: #df1f2d;
+        --teal: #4bd8d4;
+        --teal-2: #bdf6f2;
+        --orange: #ffad08;
+        --purple: #a94cff;
+        --line: rgba(248, 244, 235, 0.16);
+        --teal-line: rgba(75, 216, 212, 0.48);
+        --orange-line: rgba(255, 173, 8, 0.58);
+        --shadow: #020303;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 82% 10%, rgba(75, 216, 212, 0.12), transparent 28rem),
+          radial-gradient(circle at 12% 0%, rgba(223, 31, 45, 0.08), transparent 24rem),
+          var(--bg);
+        color: var(--ink);
+        font: 16px/1.48 Arial, Helvetica, sans-serif;
+      }
+
+      a {
+        color: var(--teal);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px clamp(18px, 4vw, 46px);
+        background: rgba(6, 7, 7, 0.9);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(14px);
+      }
+
+      .logo {
+        color: var(--red);
+        font-family: "Arial Black", Impact, sans-serif;
+        font-size: 32px;
+        letter-spacing: -0.08em;
+      }
+
+      nav {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      main {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: clamp(38px, 6vw, 78px) clamp(18px, 4vw, 44px) 88px;
+      }
+
+      h1,
+      h2,
+      h3,
+      .display {
+        font-family: "Arial Black", Impact, sans-serif;
+        letter-spacing: -0.045em;
+        line-height: 0.96;
+      }
+
+      h1 {
+        max-width: 980px;
+        margin: 0;
+        font-size: clamp(3.2rem, 8vw, 8.4rem);
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2.1rem, 4.5vw, 5rem);
+      }
+
+      h3 {
+        margin: 0;
+        font-size: clamp(1.4rem, 2.4vw, 2.15rem);
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .kicker {
+        margin: 0 0 14px;
+        color: var(--teal);
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 370px;
+        gap: clamp(28px, 5vw, 64px);
+        align-items: end;
+        min-height: 520px;
+        padding-bottom: 44px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .lede {
+        max-width: 900px;
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 1.8vw, 1.34rem);
+        font-weight: 700;
+      }
+
+      .hero-note {
+        background: var(--teal);
+        color: var(--bg-deep);
+        border: 3px solid var(--bg-deep);
+        border-radius: 10px;
+        padding: 24px;
+        box-shadow: 14px 14px 0 var(--shadow);
+      }
+
+      .hero-note b {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--red);
+        font-family: "Arial Black", Impact, sans-serif;
+        font-size: clamp(2.8rem, 7vw, 4.8rem);
+        letter-spacing: -0.07em;
+        line-height: 0.88;
+      }
+
+      .hero-note p {
+        font-weight: 900;
+      }
+
+      .red {
+        color: var(--red);
+      }
+
+      .teal {
+        color: var(--teal);
+      }
+
+      .orange {
+        color: var(--orange);
+      }
+
+      section {
+        margin-top: clamp(54px, 8vw, 96px);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.6fr);
+        gap: 26px;
+        align-items: end;
+        margin-bottom: 24px;
+      }
+
+      .section-head p {
+        color: var(--muted);
+        font-size: 1.04rem;
+        font-weight: 700;
+      }
+
+      .icp-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .icp-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 520px;
+        padding: clamp(22px, 3vw, 34px);
+        background:
+          linear-gradient(145deg, rgba(75, 216, 212, 0.08), transparent 38%),
+          var(--panel);
+        border: 1px solid var(--teal-line);
+        border-top: 4px solid var(--teal);
+        border-radius: 12px;
+      }
+
+      .icp-card.team {
+        background:
+          linear-gradient(145deg, rgba(255, 173, 8, 0.11), transparent 38%),
+          var(--panel);
+        border-color: var(--orange-line);
+        border-top-color: var(--orange);
+      }
+
+      .icp-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+
+      .icp-label,
+      .badge,
+      .mini-label {
+        font-size: 0.74rem;
+        font-weight: 950;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .icp-label {
+        color: var(--teal);
+      }
+
+      .team .icp-label,
+      .team .badge {
+        color: var(--orange);
+      }
+
+      .badge {
+        color: var(--teal);
+        white-space: nowrap;
+      }
+
+      .icp-title {
+        margin: 0 0 18px;
+        font-size: clamp(1.65rem, 3vw, 2.55rem);
+      }
+
+      .icp-body {
+        max-width: 62ch;
+        color: var(--muted);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .question-box {
+        margin: 22px 0 18px;
+        padding: 20px;
+        background: rgba(6, 7, 7, 0.35);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+      }
+
+      .question-box .mini-label {
+        display: block;
+        margin-bottom: 9px;
+        color: var(--teal);
+      }
+
+      .team .question-box .mini-label {
+        color: var(--orange);
+      }
+
+      .question-box strong {
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+        line-height: 1.25;
+      }
+
+      .bullet-title {
+        margin: 18px 0 9px;
+        font-family: "Arial Black", Impact, sans-serif;
+        letter-spacing: -0.03em;
+      }
+
+      ul.clean {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      ul.clean li + li {
+        margin-top: 8px;
+      }
+
+      ul.clean li::marker {
+        color: var(--teal);
+      }
+
+      .team ul.clean li::marker {
+        color: var(--orange);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .chip {
+        padding: 7px 12px;
+        color: var(--teal-2);
+        border: 1px solid var(--teal-line);
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 900;
+      }
+
+      .team .chip {
+        color: #ffe0a3;
+        border-color: var(--orange-line);
+      }
+
+      .edge {
+        margin-top: 20px;
+        padding: 22px;
+        background: rgba(75, 216, 212, 0.07);
+        border: 1px solid var(--teal-line);
+        border-radius: 10px;
+      }
+
+      .edge .mini-label {
+        color: var(--purple);
+      }
+
+      .edge p {
+        margin-top: 12px;
+        color: var(--ink);
+        font-size: 1.08rem;
+        font-weight: 800;
+      }
+
+      .tracks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .track {
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .track-header {
+        min-height: 280px;
+        padding: 28px;
+        background: var(--paper);
+        color: var(--bg-deep);
+        border-bottom: 8px solid var(--teal);
+      }
+
+      .track.team .track-header {
+        border-bottom-color: var(--orange);
+      }
+
+      .track-header .mini-label {
+        color: var(--red);
+      }
+
+      .track-header h3 {
+        margin-top: 14px;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+      }
+
+      .track-header p {
+        max-width: 40ch;
+        margin-top: 16px;
+        font-size: 1.05rem;
+        font-weight: 800;
+      }
+
+      .track-section {
+        padding: 24px 28px;
+        border-top: 1px solid var(--line);
+      }
+
+      .track-section:first-of-type {
+        border-top: 0;
+      }
+
+      .copy-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .copy-item {
+        display: grid;
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 14px;
+        padding: 12px 14px;
+        background: rgba(6, 7, 7, 0.36);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .copy-item span {
+        color: var(--dim);
+        font-size: 0.72rem;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .copy-item b {
+        color: var(--ink);
+      }
+
+      .visual-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .ad-mock {
+        min-height: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px;
+        color: var(--bg-deep);
+        background: var(--teal);
+        border: 3px solid var(--bg-deep);
+        border-radius: 12px;
+        box-shadow: 10px 10px 0 var(--shadow);
+      }
+
+      .ad-mock.dark {
+        color: var(--ink);
+        background:
+          linear-gradient(168deg, var(--teal) 0 16%, var(--bg-deep) 16% 68%, var(--red) 68% 100%);
+      }
+
+      .ad-mock.paper {
+        background: var(--paper);
+      }
+
+      .ad-mock .brand {
+        color: var(--red);
+        font-family: "Arial Black", Impact, sans-serif;
+        font-size: 1.4rem;
+        letter-spacing: -0.08em;
+      }
+
+      .ad-mock .mock-line {
+        color: inherit;
+        font-family: "Arial Black", Impact, sans-serif;
+        font-size: clamp(2rem, 3.5vw, 3.3rem);
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+      }
+
+      .ad-mock .mock-small {
+        max-width: 25ch;
+        font-weight: 900;
+      }
+
+      .ad-mock .mock-cta {
+        align-self: flex-start;
+        padding: 10px 14px;
+        background: var(--paper);
+        color: var(--bg-deep);
+        border: 2px solid var(--bg-deep);
+        border-radius: 5px;
+        box-shadow: 5px 5px 0 var(--shadow);
+        font-weight: 950;
+      }
+
+      .paper .mock-cta {
+        background: var(--red);
+        color: var(--ink);
+      }
+
+      .handoff {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr;
+        gap: 22px;
+      }
+
+      .handoff-card {
+        padding: 26px;
+        background: var(--paper);
+        color: var(--bg-deep);
+        border: 3px solid var(--bg-deep);
+        border-radius: 12px;
+        box-shadow: 12px 12px 0 var(--shadow);
+      }
+
+      .handoff-card h3 {
+        margin-bottom: 14px;
+      }
+
+      .handoff-card ul {
+        margin: 0;
+        padding-left: 18px;
+        font-weight: 800;
+      }
+
+      .handoff-card li + li {
+        margin-top: 10px;
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--dim);
+        font-weight: 800;
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .section-head,
+        .icp-grid,
+        .tracks,
+        .visual-grid,
+        .handoff {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 640px) {
+        header {
+          position: static;
+        }
+
+        nav {
+          display: none;
+        }
+
+        .icp-top,
+        .copy-item {
+          display: block;
+        }
+
+        .badge {
+          display: inline-block;
+          margin-top: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">CXL</div>
+      <nav aria-label="Page sections">
+        <a href="#icps">ICP Split</a>
+        <a href="#tracks">Copy Tracks</a>
+        <a href="#creative">Static Directions</a>
+        <a href="#handoff">Handoff</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="kicker">CXL ICP Messaging Brief</p>
+          <h1 id="hero-title">
+            Two ICPs. Two purchase motions. <span class="red">Do not collapse them.</span>
+          </h1>
+          <p class="lede">
+            CXL is selling into two different buying jobs: the individual marketer trying to move up and the team leader trying to increase output without headcount. Same brand. Different anxiety. Different proof.
+          </p>
+        </div>
+        <aside class="hero-note" aria-label="Core strategic note">
+          <b>2 tracks</b>
+          <p>Separate the buyer before writing the copy. Volume and ACV do not respond to the same message.</p>
+        </aside>
+      </section>
+
+      <section id="icps" aria-labelledby="icp-title">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Doc 1: CXL ICP profiles</p>
+            <h2 id="icp-title">The split at the top.</h2>
+          </div>
+          <p>
+            Recreated from the ICP visual: individual purchase is a career and capability buy. Team purchase is an output, capacity, and operating model buy.
+          </p>
+        </div>
+
+        <div class="icp-grid">
+          <article class="icp-card">
+            <div class="icp-top">
+              <span class="icp-label">ICP 1 · Individual Purchase</span>
+              <span class="badge">Higher Volume</span>
+            </div>
+            <h3 class="icp-title">Mid-Career B2B Marketers</h3>
+            <p class="icp-body">
+              5 to 15 years experience. Marketing Manager, Demand Gen Manager, Growth Marketer. Finds CXL via organic, social, or referral. Pays with personal or company card.
+            </p>
+
+            <div class="question-box">
+              <span class="mini-label">The question they're asking</span>
+              <strong>"Will this get me promoted?"</strong>
+            </div>
+
+            <p class="bullet-title">Why now</p>
+            <ul class="clean">
+              <li>Stuck in the weeds, not invited to strategy meetings</li>
+              <li>Overwhelmed by surface-level content that does not match job complexity</li>
+              <li>No clear path to upskill in areas that matter for promotion</li>
+            </ul>
+
+            <p class="bullet-title">Skills their bosses cannot find</p>
+            <div class="chips">
+              <span class="chip">Attribution 46%</span>
+              <span class="chip">Pipeline thinking 76%</span>
+              <span class="chip">CRO</span>
+              <span class="chip">Messaging</span>
+              <span class="chip">Ops efficiency 40%</span>
+            </div>
+          </article>
+
+          <article class="icp-card team">
+            <div class="icp-top">
+              <span class="icp-label">ICP 2 · Team Purchase</span>
+              <span class="badge">Higher ACV</span>
+            </div>
+            <h3 class="icp-title">Heads of Marketing, Directors (Series A-C)</h3>
+            <p class="icp-body">
+              VP Marketing, Head of Growth, Director of Demand Gen. Manages 3 to 15 people. Resource constrained, ambitious, and under pressure to make the team more effective.
+            </p>
+
+            <div class="question-box">
+              <span class="mini-label">The question they're asking</span>
+              <strong>"Will this make my team more effective without adding headcount?"</strong>
+            </div>
+
+            <p class="bullet-title">The operating reality</p>
+            <ul class="clean">
+              <li><strong class="orange">72%</strong> under high or extreme pipeline pressure</li>
+              <li><strong class="orange">46%</strong> cite attribution as the #1 pain</li>
+              <li><strong class="orange">32%</strong> cite team capacity as a top-three pain</li>
+              <li>Running enterprise programs with mid-market headcount</li>
+            </ul>
+
+            <p class="bullet-title">Budget context</p>
+            <p class="icp-body">
+              <strong class="orange">84%</strong> of budgets are flat or growing. Agencies cut 30 to 50%. Money moves toward internal capability, making training the natural destination.
+            </p>
+          </article>
+        </div>
+
+        <div class="edge">
+          <span class="mini-label">CXL's edge across both motions</span>
+          <p>
+            No theory, no fluff. For ICP 1, CXL is the skill path their boss can see. For ICP 2, CXL is faster and cheaper than adding headcount or agency retainers.
+          </p>
+        </div>
+      </section>
+
+      <section id="tracks" aria-labelledby="tracks-title">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Two copy tracks</p>
+            <h2 id="tracks-title">Same program. Different promise.</h2>
+          </div>
+          <p>
+            Keep these separate in ad groups, creative concepts, landing page modules, and email segmentation. The fastest way to weaken the offer is to blend promotion and team capacity into one vague message.
+          </p>
+        </div>
+
+        <div class="tracks">
+          <article class="track">
+            <div class="track-header">
+              <span class="mini-label">Track 1 · Individual buyer</span>
+              <h3>Get promoted by becoming harder to replace.</h3>
+              <p>
+                The individual marketer needs proof that CXL turns them from task executor into strategic operator.
+              </p>
+            </div>
+
+            <div class="track-section">
+              <p class="kicker">Messaging spine</p>
+              <div class="copy-list">
+                <div class="copy-item"><span>Pain</span><b>You are doing more work, but not getting closer to strategic ownership.</b></div>
+                <div class="copy-item"><span>Promise</span><b>Build the skills and workflows your boss is already looking for.</b></div>
+                <div class="copy-item"><span>Proof</span><b>CXL teaches attribution, pipeline thinking, CRO, messaging, and ops efficiency through practitioner-led builds.</b></div>
+                <div class="copy-item"><span>CTA</span><b>Start building the marketing systems that move you out of execution.</b></div>
+              </div>
+            </div>
+
+            <div class="track-section">
+              <p class="kicker">Headlines</p>
+              <div class="copy-list">
+                <div class="copy-item"><span>01</span><b>Become the marketer your boss cannot find.</b></div>
+                <div class="copy-item"><span>02</span><b>Stop learning tactics. Build strategic marketing systems.</b></div>
+                <div class="copy-item"><span>03</span><b>Move from execution to strategy with CXL.</b></div>
+                <div class="copy-item"><span>04</span><b>Build the skills that get marketers promoted.</b></div>
+                <div class="copy-item"><span>05</span><b>Learn attribution, pipeline thinking, CRO, and messaging from practitioners.</b></div>
+              </div>
+            </div>
+
+            <div class="track-section">
+              <p class="kicker">Descriptions</p>
+              <div class="copy-list">
+                <div class="copy-item"><span>01</span><b>Build the B2B marketing skills your boss needs but cannot easily hire for.</b></div>
+                <div class="copy-item"><span>02</span><b>CXL helps mid-career marketers move from task execution to strategic ownership.</b></div>
+                <div class="copy-item"><span>03</span><b>No surface-level tips. Learn from practitioners and build workflows you can use at work.</b></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="track team">
+            <div class="track-header">
+              <span class="mini-label">Track 2 · Team buyer</span>
+              <h3>Make the team more effective without adding headcount.</h3>
+              <p>
+                The team leader needs proof that CXL creates operating leverage, not another training library no one finishes.
+              </p>
+            </div>
+
+            <div class="track-section">
+              <p class="kicker">Messaging spine</p>
+              <div class="copy-list">
+                <div class="copy-item"><span>Pain</span><b>Pipeline pressure is rising while budgets, agencies, and headcount get tighter.</b></div>
+                <div class="copy-item"><span>Promise</span><b>Turn your marketers into operators who build reusable systems, not one-off assets.</b></div>
+                <div class="copy-item"><span>Proof</span><b>CXL replaces slow external dependency with practitioner-led workflows your team can run internally.</b></div>
+                <div class="copy-item"><span>CTA</span><b>Build internal capability before you add another retainer or hire.</b></div>
+              </div>
+            </div>
+
+            <div class="track-section">
+              <p class="kicker">Headlines</p>
+              <div class="copy-list">
+                <div class="copy-item"><span>01</span><b>Grow team output without adding headcount.</b></div>
+                <div class="copy-item"><span>02</span><b>Build internal marketing capability with CXL.</b></div>
+                <div class="copy-item"><span>03</span><b>Train your team to ship reusable marketing systems.</b></div>
+                <div class="copy-item"><span>04</span><b>Cut agency dependency without lowering the bar.</b></div>
+                <div class="copy-item"><span>05</span><b>Give your team the skills enterprise marketing now requires.</b></div>
+              </div>
+            </div>
+
+            <div class="track-section">
+              <p class="kicker">Descriptions</p>
+              <div class="copy-list">
+                <div class="copy-item"><span>01</span><b>CXL helps lean B2B teams build the systems, skills, and judgment agencies used to own.</b></div>
+                <div class="copy-item"><span>02</span><b>For marketing leaders under pipeline pressure with no easy path to more headcount.</b></div>
+                <div class="copy-item"><span>03</span><b>Build capability inside the team before you add another retainer.</b></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="creative" aria-labelledby="creative-title">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Static creative directions</p>
+            <h2 id="creative-title">Make the split visible.</h2>
+          </div>
+          <p>
+            These are not final designs. They are layout and message directions for creative, built in the CXL high-contrast system.
+          </p>
+        </div>
+
+        <div class="visual-grid">
+          <div class="ad-mock dark">
+            <div class="brand">CXL</div>
+            <div class="mock-line">Become the marketer your boss cannot find.</div>
+            <p class="mock-small">For mid-career B2B marketers who need strategy-level skills.</p>
+            <div class="mock-cta">Start building</div>
+          </div>
+
+          <div class="ad-mock">
+            <div class="brand">CXL</div>
+            <div class="mock-line">Your team needs output. Not another retainer.</div>
+            <p class="mock-small">Build internal marketing capability with practitioner-led CXL training.</p>
+            <div class="mock-cta">Train the team</div>
+          </div>
+
+          <div class="ad-mock paper">
+            <div class="brand">CXL</div>
+            <div class="mock-line">Two buyers. Two promises.</div>
+            <p class="mock-small">Individuals buy career leverage. Teams buy operating leverage. Keep the copy separate.</p>
+            <div class="mock-cta">Use the right track</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="handoff" aria-labelledby="handoff-title">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Campaign handoff</p>
+            <h2 id="handoff-title">How to use this.</h2>
+          </div>
+          <p>
+            This page should guide ad copy, landing page modules, emails, and creative briefs. It is not a new product strategy. It is a message split.
+          </p>
+        </div>
+
+        <div class="handoff">
+          <div class="handoff-card">
+            <h3>Keep separate</h3>
+            <ul>
+              <li>Separate campaign/ad group labels for individual vs team.</li>
+              <li>Separate creative hooks, not just swapped subcopy.</li>
+              <li>Separate landing page entry modules when possible.</li>
+            </ul>
+          </div>
+
+          <div class="handoff-card">
+            <h3>Creative rule</h3>
+            <ul>
+              <li>ICP 1 leads with career mobility, strategic skills, promotion, and getting out of the weeds.</li>
+              <li>ICP 2 leads with capacity, pipeline pressure, internal capability, agency replacement, and team leverage.</li>
+              <li>CXL proof stays practical in both: practitioner-led workflows, not theory.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        CXL ICP copy brief. Built as a GitHub Pages-ready static page.
+      </footer>
+    </main>
+  </body>
+</html>
